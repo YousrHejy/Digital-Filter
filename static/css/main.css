@@ -1,0 +1,164 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  display: flex;
+  height: 92vh;
+  /* flex-direction: row; */
+  justify-content: center;
+  align-items: center;
+  color: antiquewhite;
+  background-color: #0c2d48;
+  /* margin-top: -80px; */
+  font-family: cairo;
+  /* position: relative; */
+}
+
+.container {
+  display: flex;
+  margin-top: 3.1%;
+  /* margin-left: 1%; */
+  align-items: center;
+  justify-content: center;
+  /* position: absolute; */
+  /* max-width: 500px; */
+  /* margin: auto; */
+  height: 106%;
+  width: 98%;
+  background-color: #ffffff;
+  border-radius: 2%;
+  gap: 0.5%;
+}
+/*************************** Input *******************************/
+.input-container {
+  /* float: left; */
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  height: 98%;
+  width: 30%;
+  /* margin-left: -2%; */
+  gap: 2%;
+}
+.circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  height: 60%;
+}
+.input-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #bfd7ed;
+  height: 90%;
+  width: 85%;
+  border-radius: 2%;
+}
+
+/*************************** Output *******************************/
+.output-container {
+  /* float: left; */
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  height: 98%;
+  width: 34%;
+}
+.magnitude-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  height: 41%;
+}
+.phase-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  height: 41%;
+}
+.output-graph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #bfd7ed;
+  height: 95%;
+  width: 75%;
+  border-radius: 2%;
+}
+.output-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  height: 7%;
+}
+/*************************** Signal *******************************/
+.signal-container {
+  /* float: right; */
+  background-color: #ffffff;
+  height: 98%;
+  width: 32%;
+  /* margin-left: 2%;
+  margin-right: -2%; */
+}
+
+.signal-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  height: 41%;
+}
+
+.signal-graph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #bfd7ed;
+  height: 95%;
+  width: 75%;
+  border-radius: 1%;
+}
+/* **************************************** Common ************************************** */
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  height: 7%;
+  gap: 1.5%;
+  /* width: 32%; */
+}
+.labels {
+  margin-top: 1.2%;
+  display: flex;
+  color: #0c2d48;
+  text-align: center;
+  justify-content: center;
+  padding-bottom: 2%;
+  font-size: 17px;
+  font-weight: bold;
+  height: 3%;
+}
+.button {
+  background-color: #0c2d48;
+  border: none;
+  border-radius: 10%;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  /* text-decoration: none; */
+  /* display: inline-block; */
+  font-size: 17px;
+  font-weight: bold;
+  margin: 2px 1px;
+  cursor: pointer;
+  width: 35%;
+  height: 100%;
+}
