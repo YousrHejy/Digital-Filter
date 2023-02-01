@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/main.css" />
     <script src='https://cdn.plot.ly/plotly-2.16.1.min.js'></script>
     <script type="text/javascript" src="static/js/plot.js"></script>
+    <script type="text/javascript" src="static/js/z-plane.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
@@ -38,10 +39,9 @@
           <button class="button">Zeros</button>
           <button class="button">Poles</button>
         </div>
-
         <div class="circle-container">
           <div class="input-circle">
-            
+            <canvas id="zplanecanvas" width="300" height="300" style="border:1px solid #d3d3d388;"></canvas>
           </div>
         </div>
 
@@ -58,8 +58,8 @@
           <!-- <label class="in-label2">Choose Phase</label> -->
         </div>
 
-        <div id="magnitude-container">
-          <div id="output-magnitude">
+        <div class="magnitude-container" id="magnitude-container">
+          <div class="output-graph" id="output-magnitude">
             
           </div>
         </div>
@@ -69,8 +69,8 @@
           <!-- <label class="in-label2">Choose Phase</label> -->
         </div>
 
-        <div id="phase-container">
-          <div id="output-phase" >
+        <div class="phase-container" id="phase-container">
+          <div class="output-graph" id="output-phase" >
             
           </div>
         </div>

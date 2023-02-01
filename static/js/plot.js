@@ -14,12 +14,7 @@ plot = (w, value, div, label) => {
     let data = [trace]; 
     let layout = {
         margin: {
-            t: 30,
-        },
-        grid: {
-            rows: 2,
-            columns: 1,
-            pattern: 'independent'
+            t: 20,
         },
         paper_bgcolor: "transparent",
         plot_bgcolor: "transparent",
