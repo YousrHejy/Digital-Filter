@@ -82,7 +82,16 @@ body {
   background-color: #ffffff;
   height: 41%;
 }
-.output-graph {
+#output-magnitude {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #bfd7ed;
+  height: 95%;
+  width: 75%;
+  border-radius: 2%;
+}
+#output-phase {
   display: flex;
   justify-content: center;
   align-items: center;

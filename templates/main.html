@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/main.css" />
-    <!-- Normalize CSS -->
-    <script src="https://unpkg.com/konva@8.3.14/konva.min.js"></script>
-
+    <script src='https://cdn.plot.ly/plotly-2.16.1.min.js'></script>
+    <script type="text/javascript" src="static/js/plot.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
@@ -59,8 +58,8 @@
           <!-- <label class="in-label2">Choose Phase</label> -->
         </div>
 
-        <div class="magnitude-container">
-          <div class="output-graph">
+        <div id="magnitude-container">
+          <div id="output-magnitude">
             
           </div>
         </div>
@@ -70,8 +69,8 @@
           <!-- <label class="in-label2">Choose Phase</label> -->
         </div>
 
-        <div class="phase-container">
-          <div class="output-graph">
+        <div id="phase-container">
+          <div id="output-phase" >
             
           </div>
         </div>
@@ -115,8 +114,7 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <!-- Cropper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script>
+
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
