@@ -6,6 +6,10 @@ app = Flask(__name__)
 def home():
    return render_template('main.html')
 
+@app.route("/phaseCorrection")
+def phaseCorrection():
+   return render_template("phaseCorrection.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
 
