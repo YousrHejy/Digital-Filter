@@ -36,7 +36,7 @@ function changeZero() {
   flag=1;
   type="poles";
 }
-function updatefrequencyresponse(zeros, poles,context, div, label) {
+function updatefrequencyresponse(zeros, poles,context, divMagnitude,divPhase, label) {
   plane.sendZerosPoles(zeros,0);
   plane.sendZerosPoles(poles,1);
   $.ajax({
@@ -47,8 +47,8 @@ function updatefrequencyresponse(zeros, poles,context, div, label) {
       magnitude = data.magnitude;
       w = data.w;
       angle = data.angle;
-      plt.plot(w, magnitude, div, label);
-      //plt.plot(w, angle, div, label);
+      plt.plot(w, magnitude, divMagnitude, label);
+      plt.plot(w, angle, divPhase, label);
       context.clearRect(0, 0, cw, ch);
       plane.drawPlane(context)
   
@@ -95,10 +95,18 @@ function handleMouseDown(e) {
     draggingelement = array[hit];
     isDown = true;
   }
-  updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude", "",flag);
+  updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);
  // updatefrequencyresponse(zeros,poles,ctxzplane,"output-phase", "");
 }
-
+function deleteFreq() {
+  if (flag==0){
+    zeros.splice(hit, 1);
+    updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);
+  }else{
+  poles.splice(hit, 1);
+  updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);
+  }
+}
 function handleMouseUp(e) {
   // tell the browser we'll handle this event
   e.preventDefault();
@@ -149,8 +157,7 @@ document
 //   });
 document.getElementById("zplanecanvas").addEventListener("mouseup", function(e) {
   handleMouseUp(e);
-  updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude", "",flag);
- // updatefrequencyresponse(zeros,poles,ctxzplane,"output-phase", "");
+  updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);
 
 });
 document
