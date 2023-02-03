@@ -30,14 +30,14 @@
     Bootstrap Font Icon CSS
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> -->
   </head>
-  <body>
+  <body> 
     <!-- Container -->
     <div class="container">
       <!-- input -->
       <div class="input-container">
         <div class="buttons-container">
-          <button class="button">Zeros</button>
-          <button class="button">Poles</button>
+          <button onclick=" changePole()" class="button">Zeros</button>
+          <button onclick="changeZero()"class="button">Poles</button>
         </div>
         <div class="circle-container">
           <div class="input-circle">
@@ -106,7 +106,7 @@
 
         <!-- output signal -->
         <div class="signal-display">
-          <div class="signal-graph">
+          <div class="signal-graph"id="output">
 
           </div>
         </div>
