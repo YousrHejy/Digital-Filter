@@ -34,15 +34,16 @@ def getPoles():
 def getAllPassFilter():
     if request.method == 'POST':
         data = json.loads(request.data)
+        
         if (type(data) == str):
             functions.i = int(data)
             temp = functions.AllPassFiltersReal[functions.i] + 1j * functions.AllPassFiltersImg[functions.i]
-            functions.zeros = [1 / np.conjugate(temp)]
-            functions.poles = [temp]
+            
         else:
             temp = data[0] + 1j * data[1]
-            functions.zeros = [1 / np.conjugate(temp)]
-            functions.poles = [temp]
+
+        functions.zeros = [1 / np.conjugate(temp)]
+        functions.poles = [temp]
         return jsonify(0)
     return render_template("index.html")
 
