@@ -5,7 +5,7 @@ plot = (w, value, div, label) => {
     let trace = {
         x: w,
         y: value,
-        type: 'lines',
+        type: 'scatter',
         name: label,
         marker: {
             color: '#000000c5'

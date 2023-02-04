@@ -109,20 +109,15 @@ def ActivateAllPassFilter():
 
 @app.route('/getSignals', methods=['POST', 'GET'])
 def dataFilter():
-    if request.method == 'POST':
-        arr = json.loads(request.data)
-        iterator = int(arr[0])
-        x_chuncks = np.array(functions.SignalXAxisData[iterator: iterator + functions.size])
-        y_chuncks = np.array(functions.SignalYAxisData[iterator: iterator + functions.size])
-        Functions.filterData(y_chuncks)
-
+    if request.method == 'POST': 
+        value = request.json['y_axis']
+        value = np.array(value)
+        data=Functions.filterData(value)
         return jsonify({
-            'xAxisData': x_chuncks.tolist(),
-            'yAxisData': y_chuncks.tolist(),
-            'filter': functions.graphData.tolist(),
-            'datalength': functions.dataLength,
+            'yAxisData': data.tolist(),
         })
-    return render_template("index.html")
+    else :
+        return render_template("main.html")
 
 
 @app.route('/getData', methods=['POST'])
@@ -131,7 +126,7 @@ def my_form_post():
         functions.path = json.loads(request.data)
         Functions.getMyData()
         return jsonify(functions.path)
-    return render_template("index.html")
+    return render_template("main.html")
 
 
 if __name__ == '__main__':
