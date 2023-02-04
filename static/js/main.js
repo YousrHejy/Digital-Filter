@@ -7,7 +7,6 @@ let offsetY = canvasOffset.top;
 let cw = zplanecanvas.width;
 let ch = zplanecanvas.height;
 let plane = new ZPlane();
-let plt = new Plot();
 let isDown = false;
 let lastX;
 let lastY;
@@ -17,17 +16,27 @@ let zeros = [];
 let poles = [];
 let data=[];
 let draggingelement = -1;
-let i;
-let a=[];
-let b=[];
+let xAxis=[];
+let yAxis=[];
+let i=0;
 // update plot
+let plt = new Plot();
 plt.plot([], [], "output-magnitude", "");
 plt.plot([], [], "output-phase", "");
+
 // ZPlane circle
 plane.drawPlane(ctxzplane);
-
-// flag to indicate a drag is in process
-// and the last XY position that has already been processed
+function getCursorPosition(event) { 
+    let yCursor = event.clientY;
+    i+=1;
+    xAxis.push(i);
+    yAxis.push(yCursor);
+    if(xAxis.length>100){
+        xAxis.shift();
+        yAxis.shift();
+    }
+    plt.plot(xAxis,yAxis, "signal", "");
+    }
 function changePole(){
   flag=0;
   type="zeros";
@@ -36,6 +45,15 @@ function changeZero() {
   flag=1;
   type="poles";
 }
+function deleteFreq() {
+  if (flag==0){
+    zeros.splice(hit, 1);
+    updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);
+  }else{
+  poles.splice(hit, 1);
+  updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);
+  }
+} 
 function updatefrequencyresponse(zeros, poles,context, divMagnitude,divPhase, label) {
   plane.sendZerosPoles(zeros,0);
   plane.sendZerosPoles(poles,1);
@@ -96,16 +114,6 @@ function handleMouseDown(e) {
     isDown = true;
   }
   updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);
- // updatefrequencyresponse(zeros,poles,ctxzplane,"output-phase", "");
-}
-function deleteFreq() {
-  if (flag==0){
-    zeros.splice(hit, 1);
-    updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);
-  }else{
-  poles.splice(hit, 1);
-  updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);
-  }
 }
 function handleMouseUp(e) {
   // tell the browser we'll handle this event
@@ -114,47 +122,11 @@ function handleMouseUp(e) {
   // stop the drag
   isDown = false;
 }
-
-// function handleMouseMove(e) {
-//   e.preventDefault();
-//   e.stopPropagation();
-
-//   // get the current mouse position
-//   mouseX = parseInt(e.clientX - offsetX);
-//   mouseY = parseInt(e.clientY - offsetY);
-
-//   // calculate how far the mouse has moved
-//   // since the last mousemove event was processed
-//   let dx = mouseX - lastX;
-//   let dy = mouseY - lastY;
-
-//   // reset the lastX/Y to the current mouse position
-//   lastX = mouseX;
-//   lastY = mouseY;
-
-//   // change the target circles position by the
-//   // distance the mouse has moved since the last
-//   // mousemove event
-//   draggingelement[0] += dx;
-//   draggingelement[1] += dy;
-
-
-//   $("#coordinates").html("(" + ((lastX - 150) / 100) + "," + (-(lastY - 150) / 100) + ")");
-  
-//   updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude", "");
-//   //updatefrequencyresponse(zeros,poles,ctxzplane,"output-phase", "");
-// }
 document
   .getElementById("zplanecanvas")
   .addEventListener("mousedown", function(e) {
     handleMouseDown(e);
   });
-// document
-//   .getElementById("zplanecanvas")
-//   .addEventListener("mousemove", function(e) {
-//     handleMouseMove(e);
-
-//   });
 document.getElementById("zplanecanvas").addEventListener("mouseup", function(e) {
   handleMouseUp(e);
   updatefrequencyresponse(zeros,poles,ctxzplane,"output-magnitude","output-phase", "",flag);

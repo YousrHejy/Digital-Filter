@@ -100,6 +100,15 @@ body {
   width: 75%;
   border-radius: 2%;
 }
+#div1 { 
+  background-color: #0c2d48;
+  border: none;
+  border-radius: 10%;
+
+  cursor: pointer;
+  width: 35%;
+  height: 100%;
+}
 .output-button {
   display: flex;
   justify-content: center;
