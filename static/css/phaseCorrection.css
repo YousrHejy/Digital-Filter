@@ -1,14 +1,47 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-body{
-    display: flex;
-    height: 100vh;
-    width: 100%;
+body {
+  display: flex;
+  height: 100vh;
+  width: 100%;
 }
-
-#zplanecanvas{
+/* #zplanecanvas{
     height: 50%;
     width: 80%;
+} */
+#allPassInputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+#realInput {
+  height: 27px;
+  width: 100%;
+  font-weight: bold;
+  border: groove;
+  border-color: darkviolet;
+  font-size: 113%;
+}
+
+#realInput::-webkit-inner-spin-button,
+#realInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+#imaginaryInput {
+  height: 27px;
+  width: 100%;
+  font-weight: bold;
+  border: groove;
+  border-color: darkviolet;
+  font-size: 113%;
+}
+
+#imaginaryInput::-webkit-inner-spin-button,
+#imaginaryInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
 }

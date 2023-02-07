@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../static/css/phaseCorrection.css">
-</head>
-<body>
-    <canvas id="zplanecanvas" style="border:1px solid #d3d3d388;"></canvas>
+    <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/phaseCorrection.css" />
+  </head>
+  <body>
+    <!-- <canvas id="zplanecanvas" style="border:1px solid #d3d3d388;"></canvas>
     <h1>Welcome to phase correction page</h1>
-</body>
+    <label for="real">Real</label>
+    <input type="number" id="real">
+    <input type="number" id="imaginary"> -->
+
+    <div></div>
+    <div id="allPassInputs">
+      <div id="plots">
+        <div id="magnitudePlotting" style="height: 500px; width: 500px">
+          <div id="phasePlotting" style="height: 500px; width: 500px"></div>
+        </div>
+      </div>
+      <div>
+        <label for="realInput">Real input</label>
+        <br />
+        <input type="number" id="realInput" />
+      </div>
+      <div>
+        <label for="imaginaryInput">imaginary input</label>
+        <br />
+        <input type="number" id="imaginaryInput" />
+      </div>
+    </div>
+    <!-- <script src="../static/js/z-plane.js"></script> -->
+    <script src="../static/js/phaseCorrection/plotting.js"></script>
+    <script src="../static/js/phaseCorrection/phaseCorrection.js"></script>
+  </body>
 </html>
