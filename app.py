@@ -34,11 +34,12 @@ def getPoles():
 def getAllPassFilter():
     if request.method == 'POST':
         data = json.loads(request.data)
-        
+
         if (type(data) == str):
             functions.i = int(data)
-            temp = functions.AllPassFiltersReal[functions.i] + 1j * functions.AllPassFiltersImg[functions.i]
-            
+            temp = functions.AllPassFiltersReal[functions.i] + \
+                1j * functions.AllPassFiltersImg[functions.i]
+
         else:
             temp = data[0] + 1j * data[1]
 
@@ -63,8 +64,10 @@ def updateLibrary():
         return jsonify(functions.library)
     if request.method == 'POST':
         data = json.loads(request.data)
-        functions.AllPassFiltersReal = np.append(functions.AllPassFiltersReal, data[0])
-        functions.AllPassFiltersImg = np.append(functions.AllPassFiltersImg, data[1])
+        functions.AllPassFiltersReal = np.append(
+            functions.AllPassFiltersReal, data[0])
+        functions.AllPassFiltersImg = np.append(
+            functions.AllPassFiltersImg, data[1])
         Functions.writeLibrary()
         Functions.readLibrary()
         return jsonify(functions.library)
@@ -99,8 +102,10 @@ def ActivateAllPassFilter():
             functions.AllPassFiltersPoles.remove(temppoles)
         else:
             functions.AllPassFiltersPoles.append(temppoles)
-        tempzeros = list(map(Functions.formatToCoordinates, functions.AllPassFiltersZeros))
-        temppoles = list(map(Functions.formatToCoordinates, functions.AllPassFiltersPoles))
+        tempzeros = list(map(Functions.formatToCoordinates,
+                         functions.AllPassFiltersZeros))
+        temppoles = list(map(Functions.formatToCoordinates,
+                         functions.AllPassFiltersPoles))
         return jsonify({
             'allpassfilterzeros': tempzeros,
             'allpassfilterpoles': temppoles
@@ -110,14 +115,14 @@ def ActivateAllPassFilter():
 
 @app.route('/getSignals', methods=['POST', 'GET'])
 def dataFilter():
-    if request.method == 'POST': 
+    if request.method == 'POST':
         value = request.json['y_axis']
         value = np.array(value)
-        data=Functions.filterData(value)
+        data = Functions.filterData(value)
         return jsonify({
             'yAxisData': data.tolist(),
         })
-    else :
+    else:
         return render_template("main.html")
 
 
@@ -129,6 +134,10 @@ def my_form_post():
         return jsonify(functions.path)
     return render_template("main.html")
 
+
+@app.route("/phaseCorrection", method=["POST", 'GET'])
+def phaseCorrection():
+    return render_template("phaseCorrection.html")
 
 if __name__ == '__main__':
     app.run()
