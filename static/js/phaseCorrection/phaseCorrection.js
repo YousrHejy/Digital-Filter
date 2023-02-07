@@ -32,23 +32,41 @@ let plot = new plotting();
 let imaginaryInput = document.getElementById("imaginaryInput");
 let realValue, imaginaryValue;
 // plane.drawPlane(phasePlotting);
-plot.plot([], [], "phase Correction graph", "magnitudePlotting", "magnitude");
-plot.plot(
-  [1, 2, 3, 4, 5, 6],
-  [2, 4, 5, 6, 7, 9],
-  "phase Correction graph",
-  "magnitudePlotting",
-  "Magnitude"
-);
+plot.plot([], [], "phase Correction graph", "signalPhasePlotting", "phase");
+plot.plot([], [], "All pass phase", "phasePlotting", "phase");
+// plot.plot(
+//   [1, 2, 3, 4, 5, 6],
+//   [2, 4, 5, 6, 7, 9],
+//   "signal phase Correction ",
+//   "signalPhasePlotting",
+//   "phase"
+// );
 
-plot.plot([], [], "phase Correction graph", "phasePlotting", "phase");
+let examplesBox = document.getElementById("examplesCheckBox");
+let samples=document.getElementById("samples")
 
-realInput.addEventListener("keydown", () => {
-  setTimeout(plottingMagnitudePhase, 0.1);
-});
-imaginaryInput.addEventListener("keydown", () => {
-  setTimeout(plottingMagnitudePhase, 0.1);
-});
+function examplesFunction() {
+  if (examplesBox.checked) {
+    let value=samples.value
+    value=value.split('+')
+    realInput.value=value[0]
+    imaginaryInput.value=value[1].split('j')[0]
+    plottingMagnitudePhase()
+
+  }
+  else{
+    realInput.addEventListener("keydown", () => {
+      setTimeout(plottingMagnitudePhase, 0.1);
+    });
+    imaginaryInput.addEventListener("keydown", () => {
+      setTimeout(plottingMagnitudePhase, 0.1);
+    });
+  }
+}
+
+
+
+
 
 function plottingMagnitudePhase() {
   realValue = parseFloat(realInput.value);
@@ -56,14 +74,14 @@ function plottingMagnitudePhase() {
   if (isNaN(realValue)) realValue = 0;
   if (isNaN(imaginaryValue)) imaginaryValue = 0;
   zeros = [realValue, imaginaryValue];
-  poles = zeros.map( x=> x*1/(zeros[0] ** 2 + zeros[1] ** 2));
-  zeros=[zeros,[0,0]]
-  poles=[poles,[0,0]]
+  poles = zeros.map((x) => (x * 1) / (zeros[0] ** 2 + zeros[1] ** 2));
+  zeros = [zeros, [0, 0]];
+  poles = [poles, [0, 0]];
   console.log(poles);
   updatefrequencyresponse(
     poles,
     zeros,
-    "magnitudePlotting",
+    "signalPhasePlotting",
     "phasePlotting",
     "All pass filter graph"
   );

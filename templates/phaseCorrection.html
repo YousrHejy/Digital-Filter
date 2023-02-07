@@ -15,24 +15,34 @@
     <label for="real">Real</label>
     <input type="number" id="real">
     <input type="number" id="imaginary"> -->
-
-    <div></div>
     <div id="allPassInputs">
-      <div id="plots">
-        <div id="magnitudePlotting" style="height: 500px; width: 500px">
-          <div id="phasePlotting" style="height: 500px; width: 500px"></div>
-        </div>
+      <div>
+        <input type="checkbox" id="examplesCheckBox" onclick="examplesFunction()"/>
+        <label id="inputLabel" for="examplesCheckBox">Examples</label>
+        <br />
+        <select id="samples" onchange="examplesFunction()">
+          <option value="1+1j">1+1j</option>
+          <option value="0.5+0j">0.5</option>
+          <option value="1+3j">1+3j</option>
+          <option value="2+0.5j">2+0.5j</option>
+          <option value="0.2+0.3j">0.2+0.3j</option>
+        </select>
       </div>
       <div>
-        <label for="realInput">Real input</label>
+        <label id="inputLabel" for="realInput">Real input</label>
         <br />
         <input type="number" id="realInput" />
       </div>
       <div>
-        <label for="imaginaryInput">imaginary input</label>
+        <label id="inputLabel" for="imaginaryInput">imaginary input</label>
         <br />
         <input type="number" id="imaginaryInput" />
       </div>
+      <button id="addButton">Add Filter</button>
+    </div>
+    <div id="plots">
+      <div id="phasePlotting" style="height: 500px; width: 50%"></div>
+      <div id="signalPhasePlotting" style="height: 500px; width: 50%"></div>
     </div>
     <!-- <script src="../static/js/z-plane.js"></script> -->
     <script src="../static/js/phaseCorrection/plotting.js"></script>
