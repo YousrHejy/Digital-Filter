@@ -135,7 +135,7 @@ def my_form_post():
     return render_template("main.html")
 
 
-@app.route("/phaseCorrection", method=["POST", 'GET'])
+@app.route("/phaseCorrection", methods=["POST", 'GET'])
 def phaseCorrection():
     return render_template("phaseCorrection.html")
 
