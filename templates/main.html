@@ -9,6 +9,7 @@
     <script src='https://cdn.plot.ly/plotly-2.16.1.min.js'></script>
     <script type="text/javascript" src="static/js/plot.js"></script>
     <script type="text/javascript" src="static/js/z-plane.js"></script>
+  
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
@@ -48,7 +49,7 @@
 
         <div class="buttons-container">
           <button class="button">Import Filter</button>
-          <button class="button">Export Filter</button>
+          <button class="button" onclick="saveCSV()">Export Filter</button>
         </div>
       </div>
 
@@ -58,7 +59,7 @@
           <label class="mag-label">Magnitude Response</label>
           <!-- <label class="in-label2">Choose Phase</label> -->
         </div>
-
+        
         <div class="magnitude-container" id="magnitude-container">
           <div class="output-graph" id="output-magnitude">
             
@@ -84,9 +85,10 @@
       <!-- Signal -->
       <div class="signal-container">
         <div class="buttons-container">
-          <button class="button">Generate Signal</button>
-          <button class="button">Import Signal</button>
+          <button class="button">Import Signal</button>     
+        <div id="div1" onmousemove="getCursorPosition(event)"></div>
         </div>
+
 
         <div class="labels">
           <label class="in-sig-label">Input Signal</label>
@@ -95,7 +97,7 @@
 
         <!-- Input signal -->
         <div class="signal-display">
-          <div class="signal-graph">
+          <div class="signal-graph" id="signal">
             
           </div>
         </div>

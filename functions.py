@@ -90,12 +90,12 @@ class Functions:
         b, a = signal.zpk2tf(zeros, poles, gain)
         FilteredSignalYData = (signal.lfilter(b, a, originalData))
         FilteredSignalYData = np.real(FilteredSignalYData)
-
-        if len(graphData) == 0:
-            graphData = FilteredSignalYData
-        else:
-            graphData = np.delete(graphData, 0)
-            graphData = np.append(graphData, FilteredSignalYData[-1])
+        # if len(graphData) == 0:
+        return FilteredSignalYData
+        # else:
+        #     graphData = np.delete(graphData, 0)
+        #     graphData = np.append(graphData, FilteredSignalYData[-1])
+            # return graphData
 
     @staticmethod
     def getFrequencyResponse():

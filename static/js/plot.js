@@ -5,10 +5,10 @@ plot = (w, value, div, label) => {
     let trace = {
         x: w,
         y: value,
-        type: 'lines',
+        type: 'scatter',
         name: label,
         marker: {
-            color: 'rgb(3, 102, 60)'
+            color: '#000000c5'
         }
     };
     let data = [trace]; 
