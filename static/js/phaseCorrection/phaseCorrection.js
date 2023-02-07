@@ -31,6 +31,8 @@ let realInput = document.getElementById("realInput");
 let plot = new plotting();
 let imaginaryInput = document.getElementById("imaginaryInput");
 let realValue, imaginaryValue;
+let zeroZplane=[];
+let poleZplane=[];
 // plane.drawPlane(phasePlotting);
 plot.plot([], [], "phase Correction graph", "signalPhasePlotting", "phase");
 plot.plot([], [], "All pass phase", "phasePlotting", "phase");
@@ -62,8 +64,41 @@ function examplesFunction() {
       setTimeout(plottingMagnitudePhase, 0.1);
     });
   }
+  var a=new Complex(realInput.value, imaginaryInput.value);
+  myFunction(a);
 }
-
+function getvalues(element){
+  return ([((element[0] +150) * 100), ((element[1] + 150) * 100)])
+}
+function myFunction(element) {
+  var table = document.getElementById("table");
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  cell1.innerHTML = element;
+  cell2.innerHTML = "delete";
+  zeroZplane.push(zeros);
+  poleZplane.push(poles);
+  console.log( zeroZplane);
+  for(var i = 0; i < table.rows.length; i++)
+  {
+      console.log(table.rows[i]);
+      table.rows[i].cells[1].onclick = function()
+      
+      {
+          
+              index = this.parentElement.rowIndex;
+              table.deleteRow(index);
+              zeroZplane.splice(zeroZplane.indexOf([element.re,element.img]), 1);
+              poleZplane.splice(poleZplane.indexOf([element.re,element.img]), 1);
+              console.log( "s");
+              console.log( zeroZplane);
+          
+          //console.log(index);
+      };
+      
+  }
+}
 
 
 
@@ -77,7 +112,7 @@ function plottingMagnitudePhase() {
   poles = zeros.map((x) => (x * 1) / (zeros[0] ** 2 + zeros[1] ** 2));
   zeros = [zeros, [0, 0]];
   poles = [poles, [0, 0]];
-  console.log(poles);
+  // console.log(poles);
   updatefrequencyresponse(
     poles,
     zeros,
@@ -91,8 +126,8 @@ function updatefrequencyresponse(zeros, poles, divMagnitude, divPhase, label) {
   plot.sendZerosPoles(zeros, 0);
   plot.sendZerosPoles(poles, 1);
   console.log("poles is sent ");
-  console.log(zeros);
-  console.log(poles);
+  // console.log(zeros);
+  // console.log(poles);
   $.ajax({
     url: "/sendfrequencyresposedata",
     type: "get",
