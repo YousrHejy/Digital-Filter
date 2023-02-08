@@ -2,6 +2,7 @@ import numpy as np
 from flask import (Flask, json, jsonify, render_template, request)
 from functions import Functions
 import functions
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -17,7 +18,7 @@ def getZeros():
     if request.method == 'POST':
         functions.zeros = json.loads(request.data)
         return jsonify(0)
-    return render_template("index.html")
+    return render_template("main.html")
 
 
 @app.route('/getpoles', methods=['POST', 'GET'])
@@ -27,91 +28,34 @@ def getPoles():
         data = json.loads(data)
         functions.poles = data
         return jsonify(data)
-    return render_template("index.html")
+    return render_template("main.html")
 
-
-@app.route('/getallpassfilter', methods=['POST', 'GET'])
-def getAllPassFilter():
+@app.route('/exportFilter', methods=['GET','POST'])
+def export_filer():
     if request.method == 'POST':
-        data = json.loads(request.data)
-
-        if (type(data) == str):
-            functions.i = int(data)
-            temp = functions.AllPassFiltersReal[functions.i] + \
-                1j * functions.AllPassFiltersImg[functions.i]
-
-        else:
-            temp = data[0] + 1j * data[1]
-
-        functions.zeros = [1 / np.conjugate(temp)]
-        functions.poles = [temp]
-        return jsonify(0)
-    return render_template("index.html")
-
-
-@app.route('/sendallpassfilter', methods=['POST', 'GET'])
-def sendAllPassFilter():
-    if request.method == 'GET':
-        temp = Functions.allPassFilterMaker()
-        return jsonify(temp)
-    return render_template("index.html")
-
-
-@app.route('/updatelibrary', methods=['POST', 'GET'])
-def updateLibrary():
-    if request.method == 'GET':
-        Functions.readLibrary()
-        return jsonify(functions.library)
-    if request.method == 'POST':
-        data = json.loads(request.data)
-        functions.AllPassFiltersReal = np.append(
-            functions.AllPassFiltersReal, data[0])
-        functions.AllPassFiltersImg = np.append(
-            functions.AllPassFiltersImg, data[1])
-        Functions.writeLibrary()
-        Functions.readLibrary()
-        return jsonify(functions.library)
-    return render_template("index.html")
-
+        result = request.json['sendflag']
+        print(result)
+        export_zeros = pd.DataFrame( {'zeros': functions.zeros} )
+        export_poles = pd.DataFrame( {'poles': functions.poles} )
+        data = pd.concat([export_zeros,export_poles], axis=1)
+        data = pd.DataFrame(data)
+        data.to_csv('D:/SBME/3rd year/Digital-Filter/filters/filter_{str(datetime.now())}.csv', index=False)
+        return jsonify({
+            "sucess":"done",
+        })  
+    else:
+        return render_template("main.html")
 
 @app.route('/sendfrequencyresposedata', methods=['POST', 'GET'])
 def sendData():
     if request.method == 'GET':
         functions.zeros = list(map(Functions.format, functions.zeros))
         functions.poles = list(map(Functions.format, functions.poles))
-        functions.zeros = [*functions.zeros, *functions.AllPassFiltersZeros]
-        functions.poles = [*functions.poles, *functions.AllPassFiltersPoles]
+        functions.zeros = [*functions.zeros]
+        functions.poles = [*functions.poles]
         temp = Functions.frequencyResponse()
         return jsonify(temp)
-    return render_template("index.html")
-
-
-@app.route('/activateordeactivateallpassfilter', methods=['POST', 'GET'])
-def ActivateAllPassFilter():
-    if request.method == 'POST':
-        data = int(json.loads(request.data))
-        functions.a = float(
-            functions.AllPassFiltersReal[data]) + float(functions.AllPassFiltersImg[data]) * 1j
-        tempzeros = 1 / np.conjugate(functions.a)
-        temppoles = functions.a
-        if tempzeros in functions.AllPassFiltersZeros:
-            functions.AllPassFiltersZeros.remove(tempzeros)
-        else:
-            functions.AllPassFiltersZeros.append(tempzeros)
-        if temppoles in functions.AllPassFiltersPoles:
-            functions.AllPassFiltersPoles.remove(temppoles)
-        else:
-            functions.AllPassFiltersPoles.append(temppoles)
-        tempzeros = list(map(Functions.formatToCoordinates,
-                         functions.AllPassFiltersZeros))
-        temppoles = list(map(Functions.formatToCoordinates,
-                         functions.AllPassFiltersPoles))
-        return jsonify({
-            'allpassfilterzeros': tempzeros,
-            'allpassfilterpoles': temppoles
-        })
-    return render_template("index.html")
-
+    return render_template("main.html")
 
 @app.route('/getSignals', methods=['POST', 'GET'])
 def dataFilter():
@@ -125,19 +69,6 @@ def dataFilter():
     else:
         return render_template("main.html")
 
-
-@app.route('/getData', methods=['POST'])
-def my_form_post():
-    if request.method == 'POST':
-        functions.path = json.loads(request.data)
-        Functions.getMyData()
-        return jsonify(functions.path)
-    return render_template("main.html")
-
-
-@app.route("/phaseCorrection", methods=["POST", 'GET'])
-def phaseCorrection():
-    return render_template("phaseCorrection.html")
 
 if __name__ == '__main__':
     app.run()

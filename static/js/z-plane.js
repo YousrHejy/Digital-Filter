@@ -1,6 +1,6 @@
 class ZPlane{
-    constructor() { 
-    } 
+    constructor() {
+    }
 drawPlane =(context)=> {
     context.beginPath();
     context.arc(150, 150, 100, 0, 2 * Math.PI);
@@ -31,38 +31,41 @@ elements=(context, array, color,flag)=>{
             context.lineTo(x - 6 / Math.sqrt(2), y - 6 / Math.sqrt(2));
             context.moveTo(x + 6 / Math.sqrt(2), y - 6 / Math.sqrt(2));
             context.lineTo(x - 6 / Math.sqrt(2), y + 6 / Math.sqrt(2));
-            
+
         }
         if (i ==hit) {
             context.strokeStyle = '#ff0000';
         }
         context.stroke();
         context.closePath();
-    } 
+    }
     }
 drawElements=(context, zeros,poles, color,zero,pole)=>{
     this.elements(context, zeros, color,zero);
     this.elements(context, poles, color,pole);
 }
-getvalues=(element)=>{
-    return ([((element[0] - 150) / 100), (-(element[1] - 150) / 100)])
-}
-sendZerosPoles=(array,flag)=> {
+getvalues = (element) => {
+    return [(element[0] - 150) / 100, -(element[1] - 150) / 100];
+    };
+
+sendZerosPoles = (array, flag, modify) => {
     let path;
-    let values;
-    values = array.map(this.getvalues);
-    let js_zp = JSON.stringify(values);
-    if(flag==0){
-        path="/getzeros";
-    }else{
-        path="/getpoles";
+    if (modify==1) {
+        array= array.map(this.getvalues);
     }
-        $.ajax({
-            url: path,
-            type: "post",
-            contentType: "application/json",
-            dataType: "json",
-            data: js_zp,
-        });
-}
+    let js_zp = JSON.stringify(array);
+    if (flag == 0) {
+        path = "/getzeros";
+    } else {
+        path = "/getpoles";
+    }
+    $.ajax({
+        url: path,
+        type: "post",
+        contentType: "application/json",
+        dataType: "json",
+        data: js_zp,
+        success: function () {},
+    });
+    };
 }

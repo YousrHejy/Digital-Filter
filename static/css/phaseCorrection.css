@@ -84,5 +84,8 @@ body {
 
 }
 #addButton:hover{
-  background-color: rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  background-color: rgba(10, 10, 10, 0.75);
+  color: rgba(240,248,255,0.7);
 }
+

@@ -18,14 +18,14 @@ body {
 
 .container {
   display: flex;
-  margin-top: 3.1%;
+  /* margin-top: 3.1%; */
   /* margin-left: 1%; */
   align-items: center;
   justify-content: center;
   /* position: absolute; */
   /* max-width: 500px; */
   /* margin: auto; */
-  height: 106%;
+  height: 100%;
   width: 98%;
   background-color: #ffffff;
   border-radius: 2%;
@@ -100,7 +100,7 @@ body {
   width: 75%;
   border-radius: 2%;
 }
-#div1 { 
+#div1 {
   background-color: #0c2d48;
   border: none;
   border-radius: 10%;
