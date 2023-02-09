@@ -84,16 +84,6 @@ function importFilter() {
       for (i = 0; i < results.data.length; i++) { 
         var valueZero;
         var valuePole;
-        if(results.data[i].zeros.length>0 || results.data[i].poles.length>0){
-            valueZero=results.data[i].zeros.split('+');
-            valueZero[1]=valueZero[1].split('j')[0]; 
-            valuePole=results.data[i].poles.split('+');
-            valuePole[1]=valuePole[1].split('j')[0]; 
-        }else{
-          valueZero=results.data[i].zeros;
-          valuePole=results.data[i].poles;
-        }
-        
         zeroimport.push(valueZero);
         poleimport.push(valuePole);
         console.log(zeroimport);
@@ -124,7 +114,7 @@ function getCursorPosition(event) {
   let yCursor = event.clientY;
   i += 1;
   xAxis.push(i);
-  yAxis.push(yCursor);
+  yAxis.push(yCursor-1);
   if (xAxis.length > 30) {
     xAxis.shift();
     yAxis.shift();

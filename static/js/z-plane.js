@@ -45,7 +45,7 @@ drawElements=(context, zeros,poles, color,zero,pole)=>{
     this.elements(context, poles, color,pole);
 }
 getvalues = (element) => {
-    return [(element[0] - 150) / 100, -(element[1] - 150) / 100];
+    return [(element[0] - 150) / 100, - (element[1] - 150) / 100];
     };
 
 sendZerosPoles = (array, flag, modify) => {

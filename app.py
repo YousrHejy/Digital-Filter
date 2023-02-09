@@ -35,11 +35,20 @@ def export_filer():
     if request.method == 'POST':
         result = request.json['sendflag']
         print(result)
+        # square = lambda x: x ** 2
+
+        # arr = np.array([square(val) for val in arr])
         export_zeros = pd.DataFrame( {'zeros': functions.zeros} )
+        # print(export_zeros)
         export_poles = pd.DataFrame( {'poles': functions.poles} )
+        # print(export_poles)
         data = pd.concat([export_zeros,export_poles], axis=1)
+        # print(data)
         data = pd.DataFrame(data)
-        data.to_csv('D:/SBME/3rd year/Digital-Filter/filters/filter_{str(datetime.now())}.csv', index=False)
+        print(data)
+        data.to_csv('D:/SBME/3rd year/Dsp/task 5/Digital-Filter/filters/filter_{str(datetime.now())}.csv', index=False)
+        # read_data = pd.read_csv('D:/SBME/3rd year/Digital-Filter/filters/filter_{str(datetime.now())}.csv')
+        # print(read_data)
         return jsonify({
             "sucess":"done",
         })  
