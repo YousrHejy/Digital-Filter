@@ -40,7 +40,7 @@ class Functions:
         # w is the omega or the x axis of the magnitude and frequency response values
         # h is an array that hold two array one is the magnitude and one is the phase
         global w, h, zeros, poles, gain
-        w, h = signal.freqz_zpk(zeros, poles, gain, fs=10)
+        w, h = signal.freqz_zpk(zeros, poles, gain, fs=1000)
 
     @staticmethod
     def filterData(originalData):
@@ -49,7 +49,7 @@ class Functions:
         b, a = signal.zpk2tf(zeros, poles, gain)
         #  signal.lfilter(): Filter data along one-dimension with an IIR or FIR filter.
         FilteredSignalYData = (signal.lfilter(b, a, originalData))  # --> The output of the digital filter.
-        FilteredSignalYData = np.real(FilteredSignalYData)
+        FilteredSignalYData = np.real(FilteredSignalYData)/100
         # if len(graphData) == 0:
         return FilteredSignalYData
 

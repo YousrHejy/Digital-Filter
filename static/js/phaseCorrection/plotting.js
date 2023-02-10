@@ -30,7 +30,7 @@ class plotting {
     let data = [trace];
     let layout = {
       // xaxis: {range: [40, 160], title: "Square Meters"},
-      yaxis: {range: [0,300]},
+      // yaxis: {range: [0,300]},
       width: 470,
       height: 300,
       margin: {
