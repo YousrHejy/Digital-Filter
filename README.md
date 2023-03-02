@@ -40,7 +40,7 @@ This website provide the user to understand more about digital filters and how z
 4. Low Pass on ECG
 ![Circle LPF Option](images/ecgLP.png)
 5. HPF Option
-![Circle HPF Option](images/PF.png)
+![Circle HPF Option](images/HF.png)
 6. High Pass on input signal
 ![Circle LPF Option](images/inpHP.png)
 7. High Pass on ECG
