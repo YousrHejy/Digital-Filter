@@ -1,6 +1,6 @@
 let zplanecanvas = document.getElementById("zplanecanvas");
-let uploadSignal=document.querySelector("#uploadfile");
-let uploadFilter=document.querySelector("#uploadfilter");
+let uploadSignal = document.querySelector("#uploadfile");
+let uploadFilter = document.querySelector("#uploadfilter");
 let ctxzplane = zplanecanvas.getContext("2d");
 let $canvas = $("#zplanecanvas");
 let canvasOffset = $canvas.offset();
@@ -17,11 +17,11 @@ let hit;
 let dataY = [];
 let draggingelement = [];
 let xAxis = [];
-let xdata=[];
-let ydata=[];
+let xdata = [];
+let ydata = [];
 let yAxis = [];
-let zeroimport=[];
-let poleimport=[];
+let zeroimport = [];
+let poleimport = [];
 let ySend;
 let i = 0;
 let yValue = [];
@@ -39,7 +39,7 @@ document.getElementById("btn_3").addEventListener("click", function () {
   console.log("suceesss");
 });
 function sendFlag(url_path) {
-  datasent = { 'sendflag': 1 };
+  datasent = { sendflag: 1 };
   console.log(flag);
   $.ajax({
     url: url_path,
@@ -71,57 +71,22 @@ function sendSignal(x, y, flag) {
         plt.import_graph(x, y, dataY);
       }
     },
-  })
+  });
 }
-function importFilter() {
-  Papa.parse(uploadfilter.files[0], {
-    download: true,
-    header: true,
-    skipEmptyLines: true,
-    complete: function (results) {
-      console.log(results.data.length);
-      console.log(results.data.zeros);
-      for (i = 0; i < results.data.length; i++) { 
-        var valueZero;
-        var valuePole;
-        zeroimport.push(valueZero);
-        poleimport.push(valuePole);
-        console.log(zeroimport);
-      }
-      zeroimport=zeroimport.map((x) => (x.map((y) => (parseFloat(y)))));
-      zeroimport=zeroimport.map((x) => ([((x[0]*100)+150), ((-x[1]*100)+150)]));
-      poleimport=poleimport.map((x) => (x.map((y) => (parseFloat(y)))));
-      poleimport=poleimport.map((x) => ([((x[0]*100)+150), ((x[1]*100)+150)]));
-      zeros=zeros.concat(zeroimport);
-      poles=poles.concat(poleimport);
-      updatefrequencyresponse(
-        zeros,
-        poles,
-        ctxzplane,
-        "output-magnitude",
-        "output-phase",
-        ""
-      );
-    
-    }, 
-    });
-}
-uploadFilter.addEventListener("change", () => {
-  importFilter();
-});
 
 function getCursorPosition(event) {
   let yCursor = event.clientY;
   i += 1;
   xAxis.push(i);
-  yAxis.push(yCursor-1);
+  yAxis.push(yCursor);
   if (xAxis.length > 30) {
     xAxis.shift();
     yAxis.shift();
-    yValue.shift();
+    dataY.shift();
   }
-  sendSignal(xAxis, yAxis, 0);
+
   plt.plot(xAxis, yAxis, "signal", "");
+  sendSignal(xAxis, yAxis, 0);
 }
 function import_signal() {
   Papa.parse(uploadfile.files[0], {
@@ -302,7 +267,6 @@ document
   });
 // ############################################### Phase######################################################
 document.getElementById("btn_4").addEventListener("click", function () {
-
   document.getElementById("cat").style.display = "none";
   document.getElementById("first-page").style.display = "flex";
   console.log("suceesss");
@@ -312,7 +276,13 @@ let imaginaryInput = document.getElementById("imaginaryInput");
 let realValue, imaginaryValue;
 let zeroZplane = [];
 let poleZplane = [];
-plot.plotAllpass([], [], "phase Correction graph", "signalPhasePlotting", "phase");
+plot.plotAllpass(
+  [],
+  [],
+  "phase Correction graph",
+  "signalPhasePlotting",
+  "phase"
+);
 plot.plotAllpass([], [], "All pass phase", "phasePlotting", "phase");
 let examplesBox = document.getElementById("examplesCheckBox");
 let samples = document.getElementById("samples");
@@ -341,8 +311,10 @@ function plottingMagnitudePhase() {
   if (isNaN(realValue)) realValue = 0;
   if (isNaN(imaginaryValue)) imaginaryValue = 0;
   zeroZplane = [realValue, imaginaryValue];
-  poleZplane = zeroZplane.map((x) => (x * 1) / (zeroZplane[0] ** 2 + zeroZplane[1] ** 2));
-  zeroZplane =[zeroZplane];
+  poleZplane = zeroZplane.map(
+    (x) => (x * 1) / (zeroZplane[0] ** 2 + zeroZplane[1] ** 2)
+  );
+  zeroZplane = [zeroZplane];
   poleZplane = [poleZplane];
 
   var a = new Complex(realInput.value, imaginaryInput.value);
@@ -377,18 +349,12 @@ function table(element) {
   }
 }
 function applyFilter() {
-  console.log('zerosMain');
+  console.log("zerosMain");
   console.log(zerosMain);
-    zeroZplane = zeroZplane.map((x) => [
-      x[0] * 100 + 150,
-      -x[1] * 100 + 150,
-    ]);
-    poleZplane = poleZplane.map((x) => [
-      x[0] * 100 + 150,
-      -x[1] * 100 + 150,
-    ]);
-        zerosMain=zerosMain.concat(zeroZplane);
-        polesMain=polesMain.concat(poleZplane);
+  zeroZplane = zeroZplane.map((x) => [x[0] * 100 + 150, -x[1] * 100 + 150]);
+  poleZplane = poleZplane.map((x) => [x[0] * 100 + 150, -x[1] * 100 + 150]);
+  zerosMain = zerosMain.concat(zeroZplane);
+  polesMain = polesMain.concat(poleZplane);
   updatefrequencyresponse(
     zerosMain,
     polesMain,

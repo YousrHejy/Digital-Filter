@@ -26,8 +26,8 @@ body {
   /* position: absolute; */
   /* max-width: 500px; */
   /* margin: auto; */
-  height: 90%;
-  width: 98%;
+  height: 95%;
+  width: 90%;
   background-color: #ffffff;
   border-radius: 2%;
   gap: 0.5%;
@@ -104,11 +104,11 @@ body {
 #div1 {
   background-color: #0c2d48;
   border: none;
-  border-radius: 10%;
+  border-radius: 7%;
 
   cursor: pointer;
   width: 100%;
-  height: 30%;
+  height: 23%;
 }
 .output-button {
   display: flex;
@@ -140,7 +140,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #bfd7ed;
-  height: 85%;
+  height: 80%;
   width: 75%;
   border-radius: 1%;
 }

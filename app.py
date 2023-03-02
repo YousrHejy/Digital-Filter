@@ -46,7 +46,7 @@ def export_filer():
         # print(data)
         data = pd.DataFrame(data)
         print(data)
-        data.to_csv('D:/SBME/3rd year/Dsp/task 5/Digital-Filter/filters/filter_{str(datetime.now())}.csv', index=False)
+        data.to_csv('C:/Users/lenovo/Documents/Task5/tslemmmmmmmmmmmmmmmmmmmm/Digital-Filter/filters/filter.csv', index=False)
         # read_data = pd.read_csv('D:/SBME/3rd year/Digital-Filter/filters/filter_{str(datetime.now())}.csv')
         # print(read_data)
         return jsonify({
@@ -72,6 +72,7 @@ def dataFilter():
         value = request.json['y_axis']
         value = np.array(value)
         data = Functions.filterData(value)
+       
         return jsonify({
             'yAxisData': data.tolist(),
         })

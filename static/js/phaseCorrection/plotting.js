@@ -32,7 +32,7 @@ class plotting {
       // xaxis: {range: [40, 160], title: "Square Meters"},
       // yaxis: {range: [0,300]},
       width: 470,
-      height: 300,
+      height: 200,
       margin: {
         t: 20,
       },

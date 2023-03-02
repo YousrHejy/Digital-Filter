@@ -29,14 +29,8 @@ dataLength = 0  # length of SignalXAxisData (x-axis of signalData)
 
 class Functions:
     @staticmethod
-    @staticmethod
-    # def mapLibrary(x, y):
-    #     return str(str(x) + "+" + str(y) + "j")
-
-    
-
-    @staticmethod
-    def makeFilter():  # Compute the frequency response of a digital filter in ZPK form.
+    def makeFilter():  
+        # Compute the frequency response of a digital filter in ZPK form.
         # w is the omega or the x axis of the magnitude and frequency response values
         # h is an array that hold two array one is the magnitude and one is the phase
         global w, h, zeros, poles, gain
@@ -44,12 +38,12 @@ class Functions:
 
     @staticmethod
     def filterData(originalData):
-        global b, a, FilteredSignalYData, graphData, zeros, poles, gain
+        global num, dum, FilteredSignalYData, graphData, zeros, poles, gain
         #  Return polynomial transfer function representation from zeros and poles
-        b, a = signal.zpk2tf(zeros, poles, gain)
+        num, dum = signal.zpk2tf(zeros, poles, gain)
         #  signal.lfilter(): Filter data along one-dimension with an IIR or FIR filter.
-        FilteredSignalYData = (signal.lfilter(b, a, originalData))  # --> The output of the digital filter.
-        FilteredSignalYData = np.real(FilteredSignalYData)/100
+        FilteredSignalYData = (signal.lfilter(num, dum, originalData))  # --> The output of the digital filter.
+        FilteredSignalYData = np.real(FilteredSignalYData)
         # if len(graphData) == 0:
         return FilteredSignalYData
 
@@ -74,7 +68,3 @@ class Functions:
             'magnitude': MagnitudePlotData.tolist(),  # to convert MagnitudePlotData from ndarray to list
             'angle': AnglePlotData.tolist()  # to convert AnglePlotData from ndarray to list
         }
-
-    # @staticmethod
-    # def formatToCoordinates(x):
-    #     return [np.real(x) * 100 + 150, np.imag(x) * (-100) + 150]
